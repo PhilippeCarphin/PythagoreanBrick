@@ -22,12 +22,12 @@ struct Brick {
         int bc_diag2;
         int ac_diag2;
 
-        float ab_diag;
-        float bc_diag;
-        float ac_diag;
+        int ab_diag_rounded;
+        int bc_diag_rounded;
+        int ac_diag_rounded;
 
         int body_diag2;
-        float body_diag;
+        int body_diag_rounded;
 };
 
 /*******************************************************************************
@@ -37,13 +37,18 @@ void compute_diags(struct Brick *this){
         this->a2 = this->a * this->a;
         this->b2 = this->b * this->b;
         this->c2 = this->c * this->c;
+
         this->ab_diag2 = this->a2 + this->b2;
         this->bc_diag2 = this->b2 + this->c2;
         this->ac_diag2 = this->a2 + this->c2;
+
+        this->ab_diag_rounded = round((sqrt(this->ab_diag2)));
+        this->bc_diag_rounded = round((sqrt(this->bc_diag2)));
+        this->ac_diag_rounded = round((sqrt(this->ac_diag2)));
+
         this->body_diag2 = this->ab_diag2 + this->c2;
-        this->ab_diag = (sqrt(this->ab_diag2));
-        this->bc_diag = (sqrt(this->bc_diag2));
-        this->ac_diag = (sqrt(this->ac_diag2));
+
+        this->body_diag_rounded = round(sqrt(this->body_diag2));
 }
 
 /*******************************************************************************
@@ -57,19 +62,19 @@ void compute_diags(struct Brick *this){
  *******************************************************************************/
 int maybe_pythagorean(struct Brick *this){
 
-        if(fabs(round(this->ab_diag) * round(this->ab_diag) - this->ab_diag2) > EPSILON){
+        if(abs(this->ab_diag_rounded * this->ab_diag_rounded - this->ab_diag2) > EPSILON){
                 return 0;
         }
 
-        if(fabs(round(this->bc_diag) * round(this->bc_diag) - this->bc_diag2) > EPSILON){
+        if(abs(this->bc_diag_rounded * this->bc_diag_rounded - this->bc_diag2) > EPSILON){
                 return 0;
         }
 
-        if(fabs(round(this->ac_diag) * round(this->ac_diag) - this->ac_diag2) > EPSILON){
+        if(abs(this->ac_diag_rounded * this->ac_diag_rounded - this->ac_diag2) > EPSILON){
                 return 0;
         }
 
-        if(fabs(round(this->body_diag) * round(this->body_diag) - this->body_diag2) > EPSILON){
+        if(abs(this->body_diag_rounded  * this->body_diag_rounded  - this->body_diag2) > EPSILON){
                 return 0;
         }
 
