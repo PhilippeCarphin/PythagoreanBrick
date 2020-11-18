@@ -62,19 +62,19 @@ void compute_diags(struct Brick *this){
  *******************************************************************************/
 int maybe_pythagorean(struct Brick *this){
 
-        if(abs(this->ab_diag_rounded * this->ab_diag_rounded - this->ab_diag2) > EPSILON){
+        if(abs(this->ab_diag_rounded * this->ab_diag_rounded - this->ab_diag2) != 0){
                 return 0;
         }
 
-        if(abs(this->bc_diag_rounded * this->bc_diag_rounded - this->bc_diag2) > EPSILON){
+        if(abs(this->bc_diag_rounded * this->bc_diag_rounded - this->bc_diag2) != 0){
                 return 0;
         }
 
-        if(abs(this->ac_diag_rounded * this->ac_diag_rounded - this->ac_diag2) > EPSILON){
+        if(abs(this->ac_diag_rounded * this->ac_diag_rounded - this->ac_diag2) != 0){
                 return 0;
         }
 
-        if(abs(this->body_diag_rounded  * this->body_diag_rounded  - this->body_diag2) > EPSILON){
+        if(abs(this->body_diag_rounded * this->body_diag_rounded != this->body_diag2) != 0){
                 return 0;
         }
 
